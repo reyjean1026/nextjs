@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 import Logo from './Logo'
 import NavLinks from './NavLinks'
 
@@ -10,6 +11,7 @@ const Navbar = () => {
             </div>
             <ul>
                 <NavLinks/>
+                <Button/>
             </ul>
         </div>
     )
