@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  // previewFeatures = ["namedConstraints"]
 }
 
 datasource db {
@@ -17,4 +18,31 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Inventory {
+  id                Int      @id @default(autoincrement())
+  description       String
+  date_acquired     DateTime
+  property_number   String
+  quantity          Float
+  unit_value        Float
+  received_date     DateTime
+  registered_status String
+  assigned_to       String
+  temp_name         String
+  status            String?
+  attachment        String?
+  remarks           String?
+  in_status         Int
+  Pip               Pip?     @relation(fields: [pipSid], references: [sid])
+  pipSid            String?
+}
+
+model Pip {
+  sid       String      @id
+  inventory Inventory[]
+  name_f    String
+  name_m    String
+  name_l    String
 }
