@@ -1,4 +1,18 @@
 -- CreateTable
+CREATE TABLE `User` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    UNIQUE INDEX `User_username_key`(`username`),
+    UNIQUE INDEX `User_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Inventory` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `description` VARCHAR(191) NOT NULL,
@@ -14,7 +28,7 @@ CREATE TABLE `Inventory` (
     `attachment` VARCHAR(191) NULL,
     `remarks` VARCHAR(191) NULL,
     `in_status` INTEGER NOT NULL,
-    `pipId` VARCHAR(191) NOT NULL,
+    `pipSid` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -30,4 +44,4 @@ CREATE TABLE `Pip` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Inventory` ADD CONSTRAINT `Inventory_pipId_fkey` FOREIGN KEY (`pipId`) REFERENCES `Pip`(`sid`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Inventory` ADD CONSTRAINT `Inventory_pipSid_fkey` FOREIGN KEY (`pipSid`) REFERENCES `Pip`(`sid`) ON DELETE SET NULL ON UPDATE CASCADE;
