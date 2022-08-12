@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import { SessionProvider } from "next-auth/react";
 import { withTRPC } from "@trpc/next";
 
@@ -12,6 +13,7 @@ const MyApp = ({ Component, pageProps } : AppProps) => {
       <SessionProvider session={pageProps.session}>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </SessionProvider>
     </>
   );
