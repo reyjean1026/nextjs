@@ -1,59 +1,22 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { FaInstagram } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
 
-const Footer = () => {
+function Footer() {
   return (
-    // <footer className="flex h-24 w-full items-center justify-center border-t">
-    <footer className="h-auto w-full py-2 md:py-8 text-md md:text-md justify-around sm:flex sm:flex-row grid grid-cols-1 px-4 md:px-2 border-t">
-      <div className="w-36 md:w-52 md:md:w-36 my-2 md:my-auto space-y-2">
-        <Link href="/">
-          <a>
-            <Image
-              src={"/logo.svg"}
-              alt="Picture of the author"
-              width="300px"
-              height="80px"
-            />
-          </a>
-        </Link>
+    <>
+      <div className="flex flex-col justify-center items-center text-center  p-5 bg-gray-100 h-full">
+        <p className=" text-gray-800 font-semibold">
+          © 2022 | All rights reserved | Build with ❤ by{" "}
+          <span className="hover:text-red-600 font-semibold cursor-pointer">
+            DA13 ICTU{" "}
+          </span>
+        </p>
       </div>
-      <div className="flex flex-col my-2 md:my-auto space-y-2">
-        <div className="hover:underline">
-          <Link href="/#home">
-            <a>Home</a>
-          </Link>
-        </div>
-        <div className="hover:underline">
-          <Link href="/#services">
-            <a>Services</a>
-          </Link>
-        </div>
-        <div className="hover:underline">
-          <Link href="/#testimonials">
-            <a>Testimonials</a>
-          </Link>
-        </div>
-      </div>
-      <div className="flex flex-col my-2 md:my-auto space-y-2">
-        <div className="hover:underline">
-          <Link href="/#team">
-            <a>Team</a>
-          </Link>
-        </div>
-        <div className="hover:underline">
-          <Link href="/#contact">
-            <a>blog</a>
-          </Link>
-        </div>
-        <div className="hover:underline">
-          <Link href="/#contact">
-            <a>Contact</a>
-          </Link>
-        </div>
-      </div>
-    </footer>
+    </>
   );
-};
+}
 
 export default Footer;
