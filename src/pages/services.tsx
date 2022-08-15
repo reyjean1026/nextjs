@@ -116,7 +116,7 @@ const Service: NextPage = () =>{
             sortable: true,
             flex: 1, filter: true,
             floatingFilter: true
-        }));
+        }),[]);
 
     useEffect(()=>{
         fetchData()
@@ -124,9 +124,9 @@ const Service: NextPage = () =>{
 
     return (
         <>
-          <section className="container mx-auto">
+          <section className="w-full h-[90vh] relative container mx-auto py-20 mt-5 px-3">
             <div className="px-6 h-full text-gray-800">
-            <h2 className='text-3xl font-semibold mt-1 mb-12 pb-1'>Services</h2>
+            <h2 className='text-3xl font-semibold mt-1 mb-4 pb-1'>Services</h2>
          {/* On div wrapping Grid a) specify theme CSS Class Class and b) sets Grid size */}
         <form onSubmit={handleCreateData}>
           <div className="flex flex-wrap -mx-3 mb-6">

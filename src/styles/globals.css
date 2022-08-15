@@ -33,11 +33,12 @@ html {
     @apply cursor-pointer;
   }
 
-  button {
-    @apply shadow-sm shadow-gray-200 rounded-xl uppercase bg-gradient-to-r from-[#e5519b] to-[#ff7077] text-white;
-  }
-
+ 
   .custom-img {
     background-image: url("https://images.unsplash.com/photo-1551313158-73d016a829ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1437&q=80");
+  }
+
+  .animateBtn {
+    @apply transition-all duration-150 ease-linear;
   }
 }

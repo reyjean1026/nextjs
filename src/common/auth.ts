@@ -25,13 +25,13 @@ export const nextAuthOptions: NextAuthOptions = {
         });
 
         if (!user) {
-          throw new Error("username/password do not match!");
+          throw new Error("username do not match!");
         }
 
         const isValidPassword = await verify(user.password, creds.password);
 
         if (!isValidPassword) {
-          throw new Error("username/password do not match!");
+          throw new Error("password do not match!");
         }
 
         return {

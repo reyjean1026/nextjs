@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from "react-icons/ai";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
-import { BsFillPersonLinesFill } from "react-icons/bs";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useRouter } from "next/router";
 import Button from "./Button";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -15,9 +14,15 @@ const Navbar = () => {
   const handleNav = () => {
     setNav(!nav);
   };
+  const { data: session } = useSession();
 
-  const [position, setPosition] = useState("fixed");
   const router = useRouter();
+
+  const navLinks =
+  [
+  { 'name': 'Services', 'path': '/services' },
+  { 'name': 'Pricing', 'path': '/pricing' },
+]
 
   useEffect(() => {
     if (router.asPath === "/") {
@@ -29,9 +34,9 @@ const Navbar = () => {
     }
     const handleShadow = () => {
       if (window.scrollY >= 90 || router.asPath !== "/") {
-        setShadow(true);
-      } else {
         setShadow(false);
+      } else {
+        setShadow(true);
       }
     };
     console.log(navBg);
@@ -49,45 +54,33 @@ const Navbar = () => {
     >
       <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
         <div className="ml-4 flex flex-row">
-          <Image src="/../public/da-logo.png" alt="" width="50" height="50" />
+          <Image src="/da-logo.png" alt="" width="50" height="50" />
           <h3
             style={{ color: `${linkColor}` }}
-            className="font-bold uppercase py-2 ml-4 "
+            className="font-bold md:text-2xl uppercase py-2 ml-4 my-auto"
           >
-            DA- Inventory System
+             <Link href="/">
+              <a>
+            <span className="text-turbo-pink-500">Inventory</span>  System
+              </a>
+             </Link>
+           
           </h3>
         </div>
 
         <div>
           <ul style={{ color: `${linkColor}` }} className="hidden md:flex">
-            <Link href="/">
-              <li className="ml-10 text-sm uppercase hover:border-b-4  ">
-                Home
+            
+            {navLinks.map((link) => 
+                <Link href={link.path} key={link.name}>
+                <li className={session ? "ml-10 text-lg  uppercase hover:border-b-4" : "hidden"}>
+                  {link.name}
+                </li>
+              </Link>
+            )}
+              <li className="ml-10">
+                <Button />
               </li>
-            </Link>
-            <Link href="/about">
-              <li className="ml-10 text-sm uppercase hover:border-b-4 ">
-                About
-              </li>
-            </Link>
-            <Link href="/sample">
-              <li className="ml-10 text-sm uppercase hover:border-b-4">
-                Sample
-              </li>
-            </Link>
-            <Link href="/property">
-              <li className="ml-10 text-sm uppercase hover:border-b-4 ">
-                Property
-              </li>
-            </Link>
-            {/*  <Link href="/signin">
-              <li className="ml-10 text-sm uppercase">
-                <button className="px-8 py-2 border">Sign-in</button>
-              </li>
-            </Link> */}
-            <li className="ml-10">
-              <Button />
-            </li>
           </ul>
           <div
             style={{ color: `${linkColor}` }}
@@ -117,75 +110,41 @@ const Navbar = () => {
             <div className="flex w-full items-center justify-between">
               <div className="flex flex-row flex-auto">
                 <Image
-                  src="/../public/da-logo.png"
+                  src="/da-logo.png"
                   alt=""
                   width="40"
                   height="40"
+                
                 />
-                <h3 className="px-3">DA-Inventory System</h3>
+                <h3 className="ml-3">DA-Inventory System</h3>
               </div>
 
               <div
                 onClick={handleNav}
                 className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer"
               >
-                <AiOutlineClose size={25} />
+                <AiOutlineClose size={15} />
               </div>
             </div>
-            <div className="border-b border-gray-500 my-4" />
+            <div className="border-b-2 border-turbo-pink-400 my-4" />
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <Link href="/">
-                <li
-                  onClick={() => setNav(false)}
-                  className="py-4 text-sm border-b-2 border-gray-300"
-                >
-                  Home
-                </li>
-              </Link>
-              <Link href="/about">
-                <li
-                  onClick={() => setNav(false)}
-                  className="py-4 text-sm border-b-2 border-gray-300"
-                >
-                  About
-                </li>
-              </Link>
-              <Link href="/property">
-                <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  Property
-                </li>
-              </Link>
-              <Link href="/twitch">
-                <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  Twitch
-                </li>
-              </Link>
-              <Link href="/">
-                <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  Projects
-                </li>
-              </Link>
+            {navLinks.map((link) => 
+              <Link href={link.path} key={link.name}>
+              <li
+                onClick={() => setNav(false)}
+                className={session ? "py-4 text-sm border-b-2 border-gray-300" : "hidden"}
+              >
+                {link.name}
+              </li>
+            </Link>
+            )}
+         
+            
             </ul>
-            <div className="pt-40 ">
-              <p className="uppercase tracking-widest text-[#5651e5]">
-                Let's connect
-              </p>
-              <div className="flex items-center justify-between my-4 w-full sm:w-[80%]">
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
-                  <FaLinkedinIn />
-                </div>
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
-                  <FaGithub />
-                </div>
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
-                  <AiOutlineMail />
-                </div>
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
-                  <BsFillPersonLinesFill />
-                </div>
-              </div>
+            <div className="mt-8"  onClick={() => setNav(false)}>
+            <Button />
             </div>
           </div>
         </div>
